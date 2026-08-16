@@ -1,5 +1,7 @@
 # deepseek-harness-skin
 
+![deepseek-harness-skin 预览](assets/screenshot.png)
+
 为 **DeepSeek Harness** 的 Web 界面提供动漫背景皮肤的本地插件。安装后，界面使用全屏固定背景；聊天区、侧栏和设置面板保持半透明可读样式。
 
 ## 功能特性
