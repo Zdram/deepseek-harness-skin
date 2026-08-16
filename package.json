@@ -1,0 +1,10 @@
+{
+  "name": "deepseek-harness-skin",
+  "version": "0.1.0",
+  "description": "Anime background skin for the DeepSeek Harness Web UI",
+  "license": "MIT",
+  "type": "module",
+  "main": "index.js",
+  "files": ["index.js", "cordis.patch.yml", "assets", "AGENTS.md"],
+  "dsh": { "bundle": { "patch": "./cordis.patch.yml" } }
+}

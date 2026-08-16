@@ -1,0 +1,9 @@
+# deepseek-harness-skin bundle 层：把皮肤插件插入配置。
+# 默认背景图随包放在 assets/bg.png；如需自定义，可在 profile 的
+# cordis.patch.yml 中按 id 覆盖 config：
+#   - id: deepseek-harness-skin
+#     config:
+#       background: 'C:/path/to/your.png'
+- insert:
+    - id: deepseek-harness-skin
+      name: deepseek-harness-skin
