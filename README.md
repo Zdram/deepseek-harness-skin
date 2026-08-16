@@ -58,7 +58,7 @@ pnpm dsh plugin --profile web add /path/to/deepseek-harness-skin
 也可以直接从 GitHub 安装（不需要克隆本仓库）：
 
 ```sh
-dsh plugin --profile web add github:<your-name>/deepseek-harness-skin
+dsh plugin --profile web add github:Zdram/deepseek-harness-skin
 ```
 
 安装后重启 DSH，打开 Web 界面即可看到背景。脚本和文档里的仓库路径都没有写死本机路径，其他人 clone 后可以直接使用。
@@ -109,13 +109,13 @@ powershell -ExecutionPolicy Bypass -File .\install.ps1 -Background "D:/path/to/y
    git init
    git add .
    git commit -m "deepseek-harness-skin: DeepSeek Harness 背景皮肤插件"
-   git remote add origin git@github.com:<your-name>/deepseek-harness-skin.git
+   git remote add origin https://github.com/Zdram/deepseek-harness-skin.git
    git push -u origin main
    ```
 
    `.gitignore` 已排除 `node_modules/`、日志和本机专用的 `patch-local.yml`，不会把本机路径泄露出去。
 
-2. 其他人 clone 后运行 `install.sh` / `install.ps1`，或直接用 `dsh plugin add github:<your-name>/deepseek-harness-skin` 安装。
+2. 其他人 clone 后运行 `install.sh` / `install.ps1`，或直接用 `dsh plugin add github:Zdram/deepseek-harness-skin` 安装。
 
 ## 皮肤效果
 
