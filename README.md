@@ -72,6 +72,54 @@ pnpm dsh plugin --profile web add github:Zdram/deepseek-harness-skin
 - 聊天输入框下方没有白色渐变边缘。
 - 直接访问 `http://127.0.0.1:3080/deepseek-harness-skin/bg.png` 能返回图片。
 
+## DSH Desktop 桌面端
+
+本插件兼容 [DSH Desktop](https://github.com/anywhere-labs/deepseek-harness-desktop)。DSH Desktop 使用官方上游 DSH 的插件系统和 Web 服务，并打包了与本插件当前版本相同的上游 `0.1.0-rc.5`，因此同一份插件包可以直接在普通 DSH 和 DSH Desktop 中使用。
+
+注意：DSH Desktop 的默认 profile 名为 `desktop`，与普通 Web 模式的 `web` profile 相互独立。插件不会自动同步，需要在目标 profile 中分别安装。
+
+### 在 DSH Desktop 中安装
+
+从托盘菜单打开 **Open DSH Terminal**，执行：
+
+```sh
+dsh plugin add github:Zdram/deepseek-harness-skin
+```
+
+该命令默认作用于当前激活的 profile。也可以在普通终端中显式指定：
+
+```sh
+dsh plugin --profile desktop add github:Zdram/deepseek-harness-skin
+```
+
+安装完成后重启 DSH Desktop。
+
+### 在 DSH Desktop 中更换背景
+
+编辑 Desktop profile 的 `cordis.patch.yml`：
+
+```text
+%USERPROFILE%\.dsh\profiles\desktop\cordis.patch.yml
+```
+
+并添加与 Web 模式相同的配置：
+
+```yaml
+- id: deepseek-harness-skin
+  config:
+    background: 'D:/Pictures/your-background.png'
+```
+
+保存后重启 DSH Desktop。
+
+### 在 DSH Desktop 中卸载
+
+```sh
+dsh plugin --profile desktop remove deepseek-harness-skin
+```
+
+卸载后重启 DSH Desktop，并删除 `desktop` profile 的 `cordis.patch.yml` 中残留的 `deepseek-harness-skin` 条目。
+
 ## 更换背景
 
 ### 方法一：通过 profile 配置指定图片
