@@ -1,4 +1,4 @@
-﻿# deepseek-harness-skin 安装脚本（Windows / PowerShell）
+# deepseek-harness-skin 安装脚本（Windows / PowerShell）
 # 用法（在插件目录运行，或任意目录）：
 #   powershell -ExecutionPolicy Bypass -File .\install.ps1
 # 可选项：
