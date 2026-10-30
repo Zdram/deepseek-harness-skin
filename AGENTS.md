@@ -60,7 +60,7 @@ Windows 示例：
 - 只在 `src/index.ts` 做主要修改，并同步更新 `index.js`；当前运行使用的是 `index.js`。
 - 保留上面第 3、4 条列出的防闪白和白边逻辑。
 - 修改后运行 `node --check index.js` 确认语法正确。
-- 重启 DSH 后检查 `http://127.0.0.1:3080/` 页面注入是否仍存在，以及 `/deepseek-harness-skin/bg.png` 返回 200 且为图片类型。
+- 重启 DSH 后检查实际监听地址（以启动输出为准）的页面注入是否仍存在，以及 `/deepseek-harness-skin/bg.png` 返回 200 且为图片类型。
 
 ## 禁止事项
 

@@ -2,13 +2,13 @@
 
 ![deepseek-harness-skin 预览](assets/screenshot.png)
 
-为 **DeepSeek Harness** 的 Web 界面提供动漫背景皮肤的本地插件。安装后，界面使用全屏固定背景；聊天区、侧栏和设置面板保持半透明可读样式。
+为 **DeepSeek Harness** 的 Web 界面提供动漫背景皮肤的本地插件。安装后，界面使用全屏固定背景；聊天区、输入框、侧栏和设置面板保持半透明可读样式。
 
 ## 功能特性
 
 - 全屏背景铺底，背景固定不随页面滚动。
 - 背景上方只有极淡遮罩，聊天内容保持可读。
-- 侧栏、聊天区和设置面板使用浅色半透明玻璃样式。
+- 侧栏、聊天区、输入框和设置面板使用浅色半透明玻璃样式。
 - 切换会话时背景持续保留。
 - 默认背景图随插件发布，也支持自定义本地图片。
 - 支持 `png`、`jpg`、`jpeg`、`webp`、`gif`。
@@ -74,7 +74,9 @@ pnpm dsh plugin --profile web add github:Zdram/deepseek-harness-skin
 
 ## DSH Desktop 桌面端
 
-本插件兼容 [DSH Desktop](https://github.com/anywhere-labs/deepseek-harness-desktop)。DSH Desktop 使用官方上游 DSH 的插件系统和 Web 服务，并打包了与本插件当前版本相同的上游 `0.1.0-rc.5`，因此同一份插件包可以直接在普通 DSH 和 DSH Desktop 中使用。
+本插件兼容 [DSH Desktop](https://github.com/anywhere-labs/deepseek-harness-desktop)。当前版本已在 **DSH Desktop 2.0.18 / 上游核心 0.2.1-rc.2** 上验证，背景、侧栏和设置面板样式正常；插件通过官方 Web 服务的 `tapIndex` 注入，不修改 DSH 安装目录。
+
+DSH 2.x 的界面仍在快速迭代。升级 DSH 后如果出现输入框或面板样式异常，请更新本插件，并附上 DSH 版本号反馈。
 
 注意：DSH Desktop 的默认 profile 名为 `desktop`，与普通 Web 模式的 `web` profile 相互独立。插件不会自动同步，需要在目标 profile 中分别安装。
 

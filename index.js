@@ -43,12 +43,14 @@ function buildInject() {
   const COMPOSER_BLUR = 'blur(16px) saturate(150%)';
   const SETTINGS_BG = 'linear-gradient(180deg, rgba(250,251,252,0.97) 0%, rgba(250,251,252,0.93) 100%)';
   const SETTINGS_BLUR = 'blur(24px) saturate(140%)';
-  // Mirror the structural class names emitted by the current DSH client
-  // bundles so opaque app surfaces never get a chance to paint first.
+  // Match the stable suffixes of DSH's CSS-module class names. The hash
+  // prefixes change between releases, while the semantic suffixes usually do
+  // not; keep this as a first-paint guard and let the structural selectors
+  // below handle the rest.
   const SKIN_CSS = [
     'html, body, #root { background: transparent !important; }',
-    '.p78RHG_frame, .p78RHG_sidebarCol, .Jvd9iG_root, .-Z6ZpG_root, .U2QE2G_root { background: transparent !important; }',
-    '[class*="composerSeat"], [class*="composerStack"], [data-composer-card] { background: transparent !important; }',
+    '[class*="_frame"], [class*="_sidebarCol"], [class*="_centerCol"], [class*="_root"] { background: transparent !important; }',
+    '[class*="composerSeat"], [class*="composerStack"], [data-composer-card], [data-composer-seat] { background: transparent !important; }',
     'body { text-shadow: 0 1px 2px rgba(8,10,18,0.55), 0 0 12px rgba(8,10,18,0.30); }',
   ].join('\\n');
   let applied = false;
@@ -89,15 +91,26 @@ function buildInject() {
     const vw = innerWidth;
     const vh = innerHeight;
     if (!vw || !vh) return;
-    let sidebar = null;
-    let main = null;
+    const slotParent = (slot) => {
+      const node = document.querySelector('[data-slot="' + slot + '"]')?.parentElement;
+      if (!node) return null;
+      const r = node.getBoundingClientRect();
+      return r.width > 0 && r.height >= vh * 0.8 ? node : null;
+    };
+    let sidebar = slotParent('sidebar');
+    let main = slotParent('main');
+    if (!sidebar) sidebar = document.querySelector('[class*="_sidebarCol"]');
+    if (!main) main = document.querySelector('[class*="_centerCol"]');
     for (const el of document.querySelectorAll('body *')) {
+      if (sidebar && main) break;
       if (el.id === 'deepseek-harness-skin-bg') continue;
       const r = el.getBoundingClientRect();
       if (r.height < vh * 0.98 || r.width === 0) continue;
       if (!sidebar && r.x <= 1 && r.width >= 240 && r.width <= 340) sidebar = el;
       if (!main && r.x >= 200 && r.width >= vw * 0.6) main = el;
-      if (sidebar && main) break;
+    }
+    for (const el of document.querySelectorAll('[data-dsh-dream-panel]')) {
+      if (el !== sidebar && el !== main) delete el.dataset.dshDreamPanel;
     }
     if (sidebar) sidebar.dataset.dshDreamPanel = 'sidebar';
     if (main) main.dataset.dshDreamPanel = 'main';
@@ -119,7 +132,7 @@ function buildInject() {
   const markComposer = () => {
     for (const card of document.querySelectorAll('[data-composer-card], [class*="btGtYW_card"]')) {
       if (card.dataset.dshDreamGlass) continue;
-      if (card.querySelector('textarea[class*="btGtYW_input"]')) {
+      if (card.matches('[data-composer-card]') || card.querySelector('[data-composer-input], [contenteditable="true"][role="textbox"], textarea[class*="btGtYW_input"]')) {
         card.dataset.dshDreamGlass = 'composer';
       }
     }
